@@ -1,9 +1,14 @@
 import express from 'express';
 import {logger} from "./logger.js";
 import mongoose from "mongoose";
+import {config} from 'dotenv'
+
+config()
+
+const port = process.env.SERVER_PORT || 8080
+const mongoUrl = process.env.MONGODB_URL
 
 const app = express();
-
 app.get('/', (req, res) => {
     logger.info('Received a request on /');
     res.send('Hello, World!');
@@ -11,11 +16,10 @@ app.get('/', (req, res) => {
 
 app.get('/:value', (req, res) => {
     const value = req.params.value;
-    logger.info('Received '+ value + ' from URL');
+    logger.info('Received ' + value + ' from URL');
     res.send('Hello ' + value);
 });
 
-const port = process.env.SERVER_PORT || 8080
 app.listen(port, async () => {
     logger.info('Starting the server...');
     await connectDB()
@@ -23,10 +27,10 @@ app.listen(port, async () => {
     logger.info("Server started successfully");
 });
 
-async function connectDB(){
+async function connectDB() {
     logger.info("Connecting to MongoDB...");
     try {
-        await mongoose.connect("mongodb://localhost:27017/dummy", { useNewUrlParser: true, useUnifiedTopology: true });
+        await mongoose.connect(mongoUrl, {useNewUrlParser: true, useUnifiedTopology: true});
         logger.info("Connected to MongoDB successfully");
     } catch (error) {
         logger.error("Error connecting to MongoDB: ", error);
