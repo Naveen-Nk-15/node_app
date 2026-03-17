@@ -1,6 +1,6 @@
-FROM node:18-alpine
-WORKDIR /app
+FROM node:alpine
+WORKDIR /node-app
 COPY . .
-RUN npm install
+RUN npm i
 EXPOSE 8080
-ENTRYPOINT ["npm", "run", "start"]
+ENTRYPOINT [ "npm", "run", "start" ]

@@ -6,7 +6,7 @@ import {config} from 'dotenv'
 config()
 
 const port = process.env.SERVER_PORT || 8080
-const mongoUrl = process.env.MONGODB_URL
+const mongoUrl = process.env.MONGODB_URL || 'mongodb://mongocontainer:27017/mydb'
 
 const app = express();
 app.get('/', (req, res) => {
@@ -28,7 +28,7 @@ app.listen(port, async () => {
 });
 
 async function connectDB() {
-    logger.info("Connecting to MongoDB...");
+    logger.info("Connecting to MongoDB..."+mongoUrl);
     try {
         await mongoose.connect(mongoUrl, {useNewUrlParser: true, useUnifiedTopology: true});
         logger.info("Connected to MongoDB successfully");
