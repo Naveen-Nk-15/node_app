@@ -1,0 +1,11 @@
+name: Variable
+on: 
+  workflow_dispatch:
+env:
+  MY_VARIABLE: ${{ secrets.DEVOPS_HORIZON_SECRET }}
+jobs:
+  print_variable:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print the variable
+        run: echo "The value of MY_VARIABLE is:" $MY_VARIABLE
