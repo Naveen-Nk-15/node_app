@@ -7,8 +7,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Build the Docker image
-        run: docker build -t compose-node-app .
-      - name: Run the Docker container
-        run: docker run -d -p 3000:8080 --name compose-node-app-container compose-node-app
+      - name: Hello world"
+        run: echo "Hello world"
+      - name : Hello world Action in develop branch
+        run: echo "Hello world develop branch is here"
